@@ -1,0 +1,14 @@
+services:
+  frontend:
+    build:
+      context: ..
+      dockerfile: infra/Dockerfile
+    container_name: devportfolio-frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ../src/:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    command: npm start
