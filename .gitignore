@@ -1,0 +1,43 @@
+#Git Ignore para projetos REACTJS com TypeScript
+# Dependências do Node.js
+node_modules/
+# Diretórios de build
+build/
+dist/
+# Arquivos de log   
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+# Arquivos de configuração do editor
+.vscode/
+.github/
+# Arquivos de configuração do sistema operacional
+.DS_Store
+Thumbs.db
+# Arquivos de configuração do TypeScript
+tsconfig.tsbuildinfo            
+# Arquivos de configuração do ESLint
+.eslintcache
+# Arquivos de configuração do Prettier
+.prettiercache
+
+
+# Arquivos de configuração do Jest
+jest.config.js
+# Arquivos de configuração do Storybook
+.storybook/
+# Arquivos de configuração do Cypress           
+cypress/
+# Arquivos de configuração do Webpack
+webpack.config.js
+# Arquivos de configuração do Babel
+babel.config.js
+# Arquivos de configuração do Rollup
+rollup.config.js
+# Arquivos de configuração do Parcel
+parcel.config.js
+
+
+# Arquivos de configuração do Vitest
+vitest.config.js
+
