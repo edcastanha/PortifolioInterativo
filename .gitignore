@@ -41,3 +41,43 @@ parcel.config.js
 # Arquivos de configuração do Vitest
 vitest.config.js
 
+# Arquivos de ambiente
+.env
+.env.* 
+
+# Arquivos de cache do Next.js
+.next/
+
+# Arquivos de cache do React Native
+.expo/
+*.expo
+
+# Arquivos de relatórios de cobertura de testes
+coverage/
+
+# Arquivos de lock do pacote
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Arquivos de configuração locais
+*.local
+
+# Arquivos de saída temporários
+*.log
+*.tmp
+*.temp
+
+# Arquivos de snapshots de testes
+__snapshots__/
+
+# Arquivos de configuração do MacOS
+.AppleDouble
+.LSOverride
+
+# Arquivos de configuração do Linux
+*~
+
+# Arquivos de configuração do Windows
+ehthumbs.db
+Desktop.ini

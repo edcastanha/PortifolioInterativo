@@ -6,13 +6,13 @@ FROM node:22-slim
 WORKDIR /app
 
 # Copia os arquivos de dependências
-COPY ../src/package*.json ./
+COPY ../DevPortfolio/package*.json ./
 
 # Instala as dependências
 RUN npm install 
 
 # Copia o restante do código
-COPY ../src/ .
+COPY ../DevPortfolio/ .
 
 # Expõe a porta padrão do React
 EXPOSE 3000
