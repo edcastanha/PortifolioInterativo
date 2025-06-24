@@ -1,39 +1,52 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import StatCard from '../../components/dashboard/StatCard';
+import ProjectProgressCard from '../../components/dashboard/ProjectProgressCard';
 import styles from './DashboardPage.module.css';
-import { FaArchive, FaCheckCircle, FaRegClock, FaFileAlt } from 'react-icons/fa';
+import { FaProjectDiagram, FaCheckCircle, FaTasks, FaFileAlt } from 'react-icons/fa';
+import { Project } from '../../entities/Project';
 
 const DashboardPage: React.FC = () => {
-  const stats = [
+  // Os dados virão do backend no futuro.
+  const [stats, setStats] = useState([
     {
-      icon: FaArchive,
+      icon: FaProjectDiagram,
       label: 'Total de Projetos',
-      value: '3',
-      details: '+2 este mês',
+      value: '0',
+      details: '',
       iconBgColor: '#3B82F6',
     },
     {
       icon: FaCheckCircle,
       label: 'Projetos Concluídos',
-      value: '1',
-      details: '33% taxa de conclusão',
+      value: '0',
+      details: '',
       iconBgColor: '#10B981',
     },
     {
-      icon: FaRegClock,
+      icon: FaTasks,
       label: 'Stories Ativas',
       value: '0',
-      details: '3 total',
+      details: '',
       iconBgColor: '#F59E0B',
     },
     {
       icon: FaFileAlt,
       label: 'ADRs Documentados',
-      value: '2',
-      details: 'Decisões arquiteturais',
+      value: '0',
+      details: '',
       iconBgColor: '#8B5CF6',
     },
-  ];
+  ]);
+
+  const [activeProjects, setActiveProjects] = useState<Project[]>([]);
+
+  // useEffect para buscar dados da API no futuro
+  // useEffect(() => {
+  //   // Ex: fetch('/api/dashboard').then(res => res.json()).then(data => {
+  //   //   setStats(data.stats);
+  //   //   setActiveProjects(data.activeProjects);
+  //   // });
+  // }, []);
 
   return (
     <div className={styles.dashboardPage}>
@@ -53,7 +66,22 @@ const DashboardPage: React.FC = () => {
           />
         ))}
       </div>
-      {/* Outras seções do dashboard virão aqui */}
+      <div className={styles.mainContent}>
+        <div className={styles.leftColumn}>
+          <h2>Progresso dos Projetos</h2>
+          {activeProjects.length > 0 ? (
+            activeProjects.map((project) => (
+              <ProjectProgressCard key={project.id} project={project} />
+            ))
+          ) : (
+            <p>Nenhum projeto ativo no momento.</p>
+          )}
+        </div>
+        <div className={styles.rightColumn}>
+          <h2>Feed de Atividades</h2>
+          <p>Nenhuma atividade recente.</p>
+        </div>
+      </div>
     </div>
   );
 };

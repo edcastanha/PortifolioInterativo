@@ -2,16 +2,13 @@ import React from 'react';
 import { StatCardProps } from '../../entities/StatCard';
 import styles from './StatCard.module.css';
 
-const StatCard: React.FC<StatCardProps> = ({ icon: Icon, label, value, details, iconBgColor }) => {
-  // Adiciona uma verificação para garantir que o Ícone é válido antes de renderizar
-  if (!Icon) {
-    return null;
-  }
+const StatCard: React.FC<StatCardProps> = ({ icon, label, value, details, iconBgColor }) => {
+  const Icon = icon as React.ElementType;
 
   return (
     <div className={styles.statCard}>
       <div className={styles.iconWrapper} style={{ backgroundColor: iconBgColor || '#0F172A' }}>
-        <Icon className={styles.icon} />
+        {Icon && <Icon className={styles.icon} />}
       </div>
       <div className={styles.info}>
         <div className={styles.value}>{value}</div>

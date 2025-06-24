@@ -1,25 +1,28 @@
 import React from 'react';
+import { Project } from '../../entities/Project';
 import styles from './ProjectProgressCard.module.css';
 
 interface ProjectProgressCardProps {
-  projectName: string;
-  progress: number;
-  status: string;
-  dueDate: string;
+  project: Project;
 }
 
-const ProjectProgressCard: React.FC<ProjectProgressCardProps> = ({ projectName, progress, status, dueDate }) => {
+const ProjectProgressCard: React.FC<ProjectProgressCardProps> = ({ project }) => {
   return (
     <div className={styles.card}>
-      <h4>{projectName}</h4>
+      <div className={styles.cardHeader}>
+        <span>{project.name}</span>
+        <span className={`${styles.status} ${styles[project.status]}`}>
+          {project.status}
+        </span>
+      </div>
+      <p className={styles.description}>{project.description}</p>
       <div className={styles.progressBarContainer}>
-        <div className={styles.progressBar} style={{ width: `${progress}%` }}></div>
+        <div
+          className={styles.progressBar}
+          style={{ width: `${project.progress}%` }}
+        ></div>
       </div>
-      <div className={styles.details}>
-        <span>{progress}%</span>
-        <span>{status}</span>
-        <span>Vencimento: {dueDate}</span>
-      </div>
+      <div className={styles.progressText}>{project.progress}% Concluído</div>
     </div>
   );
 };
