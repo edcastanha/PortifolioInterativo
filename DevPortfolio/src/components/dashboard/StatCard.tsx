@@ -3,6 +3,11 @@ import { StatCardProps } from '../../entities/StatCard';
 import styles from './StatCard.module.css';
 
 const StatCard: React.FC<StatCardProps> = ({ icon: Icon, label, value, details, iconBgColor }) => {
+  // Adiciona uma verificação para garantir que o Ícone é válido antes de renderizar
+  if (!Icon) {
+    return null;
+  }
+
   return (
     <div className={styles.statCard}>
       <div className={styles.iconWrapper} style={{ backgroundColor: iconBgColor || '#0F172A' }}>
