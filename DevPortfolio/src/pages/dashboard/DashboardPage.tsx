@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import StatCard from '../../components/dashboard/StatCard';
 import ProjectProgressCard from '../../components/dashboard/ProjectProgressCard';
 import ActivityFeed from '../../components/dashboard/ActivityFeed';
+import QuickActions from '../../components/dashboard/QuickActions';
+import TechDistribution from '../../components/dashboard/TechDistribution';
 import styles from './DashboardPage.module.css';
-import { FolderKanban, CheckCircle, ListTodo, FileText } from 'lucide-react';
+import { FolderKanban, CheckCircle, ListTodo, FileText, Plus } from 'lucide-react';
 import { Project } from '../../entities/Project';
 import { Activity } from '../../entities/Activity';
 import { mockProjects } from '../../services/mock/projectMock';
@@ -89,7 +91,7 @@ const DashboardPage: React.FC = () => {
           <p>Gerencie seus projetos Full Stack, documentação e histórias de usuário em um só lugar</p>
         </div>
         <button className={styles.addButton} onClick={() => window.location.href = '/projects'}>
-          + Novo Projeto
+          <Plus size={16} /> Novo Projeto
         </button>
       </header>
       <div className={styles.statsGrid}>
@@ -105,19 +107,29 @@ const DashboardPage: React.FC = () => {
         ))}
       </div>
       <div className={styles.mainContent}>
-        <div className={styles.leftColumn}>
-          <h2>Progresso dos Projetos</h2>
-          {activeProjects.length > 0 ? (
-            activeProjects.map((project) => (
-              <ProjectProgressCard key={project.id} project={project} />
-            ))
-          ) : (
-            <p>Nenhum projeto ativo no momento.</p>
-          )}
+        <div className={styles.contentLeft}>
+          <div className={styles.card}>
+            <h2>Progresso dos Projetos</h2>
+            {activeProjects.length > 0 ? (
+              activeProjects.map((project) => (
+                <ProjectProgressCard key={project.id} project={project} />
+              ))
+            ) : (
+              <p>Nenhum projeto ativo no momento.</p>
+            )}
+          </div>
+          <div className={styles.card}>
+            <TechDistribution />
+          </div>
         </div>
-        <div className={styles.rightColumn}>
-          <h2>Feed de Atividades</h2>
-          <ActivityFeed activities={activities} />
+        <div className={styles.contentRight}>
+          <div className={styles.card}>
+            <h2>Feed de Atividades</h2>
+            <ActivityFeed activities={activities} />
+          </div>
+          <div className={styles.card}>
+            <QuickActions />
+          </div>
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Activity } from '../../entities/Activity';
-import { format, parseISO } from 'date-fns';
+import { format, parseISO, formatDistanceToNow } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import styles from './ActivityFeed.module.css';
 
@@ -51,8 +51,10 @@ const ActivityFeed: React.FC<ActivityFeedProps> = ({ activities }) => {
               {formatDate(activity.timestamp)}
             </div>
           </div>
-          <div className={styles.activityMessage}>
-            {activity.message}
+          <div className={styles.activityContent}>
+            <div className={styles.activityMessage}>
+              {activity.message}
+            </div>
           </div>
         </div>
       ))}
