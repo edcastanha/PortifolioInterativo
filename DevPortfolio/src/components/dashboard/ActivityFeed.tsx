@@ -1,6 +1,6 @@
 import React from 'react';
 import { Activity } from '../../entities/Activity';
-import { format, parseISO, formatDistanceToNow } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import styles from './ActivityFeed.module.css';
 
