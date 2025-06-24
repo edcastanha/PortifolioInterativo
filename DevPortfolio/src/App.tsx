@@ -2,12 +2,13 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MainLayout from './layout/MainLayout';
 import DashboardPage from './pages/dashboard/DashboardPage';
-import './App.css'; // Mantendo um CSS global se necessário
+import ProjectsPage from './pages/projects/ProjectsPage';
+import UserStoriesPage from './pages/user-stories/UserStoriesPage';
+import './App.css';
 
-// Placeholders para outras páginas
-const ProjectsPage = () => <div>Página de Projetos</div>;
-const UserStoriesPage = () => <div>Página de Histórias de Usuário</div>;
+// Placeholder para a página de documentação
 const DocumentationPage = () => <div>Página de Documentação</div>;
+
 
 function App() {
   return (
