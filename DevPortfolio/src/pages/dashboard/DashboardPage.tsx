@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import StatCard from '../../components/dashboard/StatCard';
 import ProjectProgressCard from '../../components/dashboard/ProjectProgressCard';
 import styles from './DashboardPage.module.css';
@@ -7,7 +7,7 @@ import { Project } from '../../entities/Project';
 
 const DashboardPage: React.FC = () => {
   // Os dados virão do backend no futuro.
-  const [stats, setStats] = useState([
+  const [stats] = useState([
     {
       icon: FaProjectDiagram,
       label: 'Total de Projetos',
@@ -38,7 +38,7 @@ const DashboardPage: React.FC = () => {
     },
   ]);
 
-  const [activeProjects, setActiveProjects] = useState<Project[]>([]);
+  const [activeProjects] = useState<Project[]>([]);
 
   // useEffect para buscar dados da API no futuro
   // useEffect(() => {

@@ -4,7 +4,7 @@ import { mockProjects } from '../../services/mock/projectMock';
 import styles from './ProjectsPage.module.css';
 
 const ProjectsPage: React.FC = () => {
-  const [projects, setProjects] = useState(mockProjects);
+  const [projects] = useState(mockProjects);
 
   return (
     <div className={styles.container}>

@@ -1,7 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './Sidebar.module.css';
-import { FaTachometerAlt, FaProjectDiagram, FaUserClock, FaFileAlt, FaGithub, FaCode } from 'react-icons/fa';
+import { FaTachometerAlt, FaProjectDiagram, FaFileAlt } from 'react-icons/fa';
+import { FaGithub, FaCode, FaUserClock } from 'react-icons/fa6';
 
 const Sidebar: React.FC = () => {
   return (
