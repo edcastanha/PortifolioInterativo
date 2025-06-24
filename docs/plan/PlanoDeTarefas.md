@@ -6,11 +6,11 @@ Este documento detalha as fases e tarefas para a implementação da aplicação 
 
 **Objetivo:** Criar o esqueleto da aplicação, configurar o ambiente e implementar o layout principal.
 
-- [ ] **Tarefa 1.1:** Revisar e finalizar a configuração do projeto React com TypeScript.
-- [ ] **Tarefa 1.2:** Definir a estrutura de pastas para componentes, páginas, hooks e serviços.
-- [ ] **Tarefa 1.3:** Implementar o layout principal da aplicação (ex: `MainLayout`) com Sidebar e área de conteúdo.
-- [ ] **Tarefa 1.4:** Configurar o sistema de roteamento (ex: com `react-router-dom`) e criar as rotas iniciais (Dashboard, Projetos, etc.).
-- [ ] **Tarefa 1.5:** Estilizar os componentes base de acordo com a paleta de cores e tipografia definidas no PRD.
+- [x] **Tarefa 1.1:** Revisar e finalizar a configuração do projeto React com TypeScript.
+- [x] **Tarefa 1.2:** Definir a estrutura de pastas para componentes, páginas, hooks e serviços.
+- [x] **Tarefa 1.3:** Implementar o layout principal da aplicação (ex: `MainLayout`) com Sidebar e área de conteúdo.
+- [x] **Tarefa 1.4:** Configurar o sistema de roteamento (ex: com `react-router-dom`) e criar as rotas iniciais (Dashboard, Projetos, etc.).
+- [x] **Tarefa 1.5:** Estilizar os componentes base de acordo com a paleta de cores e tipografia definidas no PRD.
 
 ## Fase 2: Dashboard e Gerenciamento de Projetos (Sprint 2)
 
