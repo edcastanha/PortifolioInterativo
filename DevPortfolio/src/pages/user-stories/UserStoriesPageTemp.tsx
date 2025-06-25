@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { DropResult } from 'react-beautiful-dnd';
-import KanbanBoardDebug from '../../components/user-stories/KanbanBoardDebug';
+import KanbanBoard from '../../components/user-stories/KanbanBoard';
 import UserStoryForm from '../../components/user-stories/UserStoryForm';
 import { UserStory } from '../../entities/UserStory';
 import { userStoryService } from '../../services/user-story/userStoryService';
@@ -94,7 +94,6 @@ const UserStoriesPage: React.FC = () => {
     handleCloseForm();
   };
 
-
   return (
     <div className={styles.container}>
       <div className="flex justify-between items-center mb-6">
@@ -106,7 +105,7 @@ const UserStoriesPage: React.FC = () => {
           Adicionar História
         </button>
       </div>
-      <KanbanBoardDebug stories={stories} onDragEnd={handleDragEnd} onEditStory={handleOpenForm} />
+      <KanbanBoard stories={stories} onDragEnd={handleDragEnd} onEditStory={handleOpenForm} />
       {isFormOpen && (
         <UserStoryForm
           story={editingStory}
