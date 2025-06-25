@@ -5,7 +5,8 @@ import { ADR } from '../../services/documentation/documentationService';
 
 interface ADRCardProps {
   adr: ADR;
-  onClick?: () => void;
+  onEdit: (adr: ADR) => void;
+  onDelete: (id: number) => void;
 }
 
 const statusConfig = {
@@ -16,23 +17,28 @@ const statusConfig = {
   superseded: { icon: FileText, color: '#8B5CF6', label: 'Substituído' },
 };
 
-const ADRCard: React.FC<ADRCardProps> = ({ adr, onClick }) => {
-  const { icon: StatusIcon, color, label } = statusConfig[adr.status];
+const ADRCard: React.FC<ADRCardProps> = ({ adr, onEdit, onDelete }) => {
+  const { id, title, status, date } = adr;
+  const { icon: StatusIcon, color, label } = statusConfig[status];
 
   return (
-    <div className={styles.card} onClick={onClick}>
-      <div className={styles.header}>
+    <div className={styles.card}>
+      <div className={styles.cardHeader}>
         <div className={styles.title}>
           <FileText size={20} />
-          <h3>{adr.title}</h3>
+          <h3>{title}</h3>
         </div>
+        <div className={styles.actions}>
+          <button onClick={() => onEdit(adr)} className={styles.editButton}>Editar</button>
+          <button onClick={() => onDelete(id)} className={styles.deleteButton}>Excluir</button>
+        </div>
+      </div>
+      <div className={styles.cardBody}>
         <div className={styles.status} style={{ backgroundColor: color + '20', color }}>
           <StatusIcon size={16} />
           <span>{label}</span>
         </div>
-      </div>
-      <div className={styles.footer}>
-        <span className={styles.date}>{adr.date}</span>
+        <span className={styles.date}>{date}</span>
       </div>
     </div>
   );

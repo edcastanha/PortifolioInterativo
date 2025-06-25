@@ -5,7 +5,7 @@ import ADRList from '../../components/documentation/ADRList';
 import ADRForm from '../../components/documentation/ADRForm';
 import styles from './DocumentationPage.module.css';
 import { useToast } from '../../context/ToastContext';
-import { documentationService } from '../../services/documentation/documentationService';
+import { documentationService, ADR } from '../../services/documentation/documentationService';
 
 interface TabProps {
   label: string;
@@ -25,9 +25,40 @@ const Tab: React.FC<TabProps> = ({ label, isActive, onClick }) => (
 const DocumentationPage: React.FC = () => {
   const { projectId } = useParams<{ projectId: string }>();
   const [activeTab, setActiveTab] = useState<'readme' | 'adrs'>('readme');
-  const [readmeContent, setReadmeContent] = useState(documentationService.getReadme(projectId || 'default'));
+  const [readmeContent, setReadmeContent] = useState(() => documentationService.getReadme(projectId || 'default'));
+  const [adrs, setAdrs] = useState<ADR[]>(() => documentationService.getADRs(projectId || 'default'));
   const [showADRForm, setShowADRForm] = useState(false);
+  const [editingADR, setEditingADR] = useState<ADR | undefined>(undefined);
   const { showToast } = useToast();
+
+  // Recarrega os ADRs quando o ID do projeto mudar
+  useEffect(() => {
+    setAdrs(documentationService.getADRs(projectId || 'default'));
+    setReadmeContent(documentationService.getReadme(projectId || 'default'));
+  }, [projectId]);
+
+  const handleShowForm = (adr?: ADR) => {
+    setEditingADR(adr);
+    setShowADRForm(true);
+  };
+
+  const handleHideForm = () => {
+    setShowADRForm(false);
+    setEditingADR(undefined);
+  };
+
+  const refreshADRs = () => {
+    setAdrs(documentationService.getADRs(projectId || 'default'));
+  };
+
+  const handleDeleteADR = (adrId: number) => {
+    if (window.confirm('Tem certeza que deseja excluir este ADR?')) {
+      documentationService.deleteADR(projectId || 'default', adrId);
+      refreshADRs();
+      showToast('success', 'ADR excluído com sucesso!');
+    }
+  };
+
 
   return (
     <div className={styles.container}>
@@ -72,20 +103,20 @@ const DocumentationPage: React.FC = () => {
               <h2>Registros de Decisão de Arquitetura</h2>
               <button
                 className={styles.addButton}
-                onClick={() => setShowADRForm(true)}
+                onClick={() => handleShowForm()}
               >
                 Novo ADR
               </button>
             </div>
-            <ADRList />
+            <ADRList adrs={adrs} onEdit={handleShowForm} onDelete={handleDeleteADR} />
             {showADRForm && (
               <ADRForm
-                onSubmit={(data) => {
-                  // O ADR já foi salvo pelo formulário
-                  showToast('success', 'ADR criado com sucesso!');
-                  setShowADRForm(false);
+                adrToEdit={editingADR}
+                onSubmit={() => {
+                  refreshADRs();
+                  handleHideForm();
                 }}
-                onCancel={() => setShowADRForm(false)}
+                onCancel={handleHideForm}
               />
             )}
           </div>

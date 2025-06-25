@@ -4,21 +4,19 @@ import ADRCard from './ADRCard';
 import styles from './ADRList.module.css';
 import { documentationService, ADR } from '../../services/documentation/documentationService';
 
+interface ADRListProps {
+  adrs: ADR[];
+  onEdit: (adr: ADR) => void;
+  onDelete: (adrId: number) => void;
+}
 
-
-const ADRList: React.FC = () => {
+const ADRList: React.FC<ADRListProps> = ({ adrs, onEdit, onDelete }) => {
   const { projectId } = useParams<{ projectId: string }>();
-  const [adrs, setADRs] = useState<ADR[]>([]);
-
-  useEffect(() => {
-    const loadedADRs = documentationService.getADRs(projectId || 'default');
-    setADRs(loadedADRs);
-  }, [projectId]);
 
   return (
     <div className={styles.listContainer}>
       {adrs.map(adr => (
-        <ADRCard key={adr.id} adr={adr} />
+        <ADRCard key={adr.id} adr={adr} onEdit={onEdit} onDelete={onDelete} />
       ))}
       {adrs.length === 0 && (
         <div className={styles.emptyState}>

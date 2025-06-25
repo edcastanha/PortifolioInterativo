@@ -2,6 +2,7 @@ import { storageService } from '../storage/storageService';
 
 export interface ADR {
   id: number;
+  projectId: string; // Adicionado para vincular ao projeto
   title: string;
   status: 'proposed' | 'accepted' | 'rejected' | 'deprecated' | 'superseded';
   date: string;
@@ -22,24 +23,28 @@ class DocumentationService {
   }
 
   // ADRs
-  saveADR(projectId: string, adr: Omit<ADR, 'id'>): ADR {
+  saveADR(projectId: string, adr: Omit<ADR, 'id'> & { id?: number }): ADR {
     const adrs = this.getADRs(projectId);
+
+    if (adr.id) {
+      const index = adrs.findIndex(a => a.id === adr.id);
+      if (index !== -1) {
+        // Lógica de atualização
+        const updatedADR = { ...adrs[index], ...adr, id: adr.id };
+        adrs[index] = updatedADR;
+        this.saveADRs(projectId, adrs);
+        return updatedADR;
+      }
+    }
+    
+    // Lógica de criação
     const newADR: ADR = {
       ...adr,
-      id: this.generateADRId(adrs)
+      id: this.generateADRId(adrs),
     };
     adrs.push(newADR);
     this.saveADRs(projectId, adrs);
     return newADR;
-  }
-
-  updateADR(projectId: string, adr: ADR): void {
-    const adrs = this.getADRs(projectId);
-    const index = adrs.findIndex(a => a.id === adr.id);
-    if (index !== -1) {
-      adrs[index] = adr;
-      this.saveADRs(projectId, adrs);
-    }
   }
 
   deleteADR(projectId: string, adrId: number): void {
